@@ -1,17 +1,22 @@
 const path = require('path');
-const HTMLPLUGIN = require('html-webpack-plugin');
 module.exports = {
+    // 添加工作环境
+    target: 'node',
+
     entry: {
-        app: path.join(__dirname, '../client/app.js')
+        app: path.join(__dirname, '../client/server.entry.js')
     },
     output: {
-        filename: "[name].[hash].js",
+        filename: "server-entry.js",
         // 依赖树有更改, hash就更改, 达到最长使用个浏览器缓存的目的
 
         path: path.join(__dirname, '../dist'),
 
-        // publicPath: "",
+        publicPath: "/public",
+
         // 区分静态资源, 还是api请求
+
+        libraryTarget: "commonjs2"
     },
 
     module: {
@@ -33,9 +38,5 @@ module.exports = {
             }
 
         ]
-    },
-
-    plugins: [
-        new HTMLPLUGIN()
-    ]
+    }
 }
